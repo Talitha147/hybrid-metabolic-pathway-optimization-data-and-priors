@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment id="c" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="m1" compartment="c" initialAmount="2" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="m2" compartment="c" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="m3" compartment="c" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="m4" compartment="c" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="A_Vmax" value="1" constant="true"/>
+      <parameter id="A_Km" value="1" constant="true"/>
+      <parameter id="B_Vmax" value="1" constant="true"/>
+      <parameter id="B_Km" value="1" constant="true"/>
+      <parameter id="C_Vmax" value="1.5" constant="true"/>
+      <parameter id="C_Km" value="1" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="v1" reversible="false">
+        <listOfReactants>
+          <speciesReference species="m1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="m2" stoichiometry="1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> A_Vmax </ci>
+              <ci> m1 </ci>
+              <apply>
+                <power/>
+                <ci> A_Km </ci>
+                <cn type="integer"> -1 </cn>
+              </apply>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <cn type="integer"> 1 </cn>
+                  <apply>
+                    <times/>
+                    <ci> m1 </ci>
+                    <apply>
+                      <power/>
+                      <ci> A_Km </ci>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <cn type="integer"> -1 </cn>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="v2" reversible="false">
+        <listOfReactants>
+          <speciesReference species="m2" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="m3" stoichiometry="1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> B_Vmax </ci>
+              <ci> m2 </ci>
+              <apply>
+                <power/>
+                <ci> B_Km </ci>
+                <cn type="integer"> -1 </cn>
+              </apply>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <cn type="integer"> 1 </cn>
+                  <apply>
+                    <times/>
+                    <ci> m2 </ci>
+                    <apply>
+                      <power/>
+                      <ci> B_Km </ci>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <cn type="integer"> -1 </cn>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="v3" reversible="false">
+        <listOfReactants>
+          <speciesReference species="m2" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="m4" stoichiometry="1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> C_Vmax </ci>
+              <ci> m2 </ci>
+              <apply>
+                <power/>
+                <ci> C_Km </ci>
+                <cn type="integer"> -1 </cn>
+              </apply>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <cn type="integer"> 1 </cn>
+                  <apply>
+                    <times/>
+                    <ci> m2 </ci>
+                    <apply>
+                      <power/>
+                      <ci> C_Km </ci>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <cn type="integer"> -1 </cn>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
