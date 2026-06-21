@@ -1,0 +1,27 @@
+{
+  "config_id": 3,
+  "n_runs": 6,
+  "mean_test_rmse": 0.007945597615691182,
+  "std_test_rmse": 0.00029726072525853664,
+  "median_test_rmse": 0.00800046834426215,
+  "max_test_rmse": 0.0083000666910353,
+  "min_test_rmse": 0.007407845426565,
+  "robust_score": 0.008242858340949719,
+  "mean_val_loss": 6.432964112004227e-05,
+  "std_val_loss": 5.245488514665102e-06,
+  "mean_training_time": 553.4598699013392,
+  "std_training_time": 24.318319141909353,
+  "config": {
+    "width_NODE": 73,
+    "depth_NODE": 1,
+    "normalize": true,
+    "dropout": 0.1,
+    "batch_size": 128,
+    "learning_rate": 1e-05,
+    "solver": "Tsit5",
+    "weight_decay": 0.0,
+    "dt0": 0.0001,
+    "rtol": 0.001,
+    "atol": 2e-06
+  }
+}

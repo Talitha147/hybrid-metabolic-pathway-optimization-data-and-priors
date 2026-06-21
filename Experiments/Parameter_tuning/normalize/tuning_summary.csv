@@ -1,0 +1,17 @@
+config_id,run_id,status,test_rmse,val_loss,training_time,iterations,stopping_condition,width_NODE,depth_NODE,normalize,dropout,batch_size,learning_rate,solver,weight_decay,dt0,rtol,atol
+1,0,success,0.0070977945629822,6.703951459227482e-05,599.6461493968964,1351.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+1,6,success,0.0074710338206395,5.294233829752936e-05,638.0307207107544,1351.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+1,3,success,0.0077424522596423,5.931449927116276e-05,660.7899940013885,1351.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+1,5,success,0.0078413749306993,6.228797782496792e-05,531.7102296352386,1351.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+1,1,success,0.0083448538103618,7.035833141987651e-05,510.92241406440735,1201.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+1,2,success,0.0083801888820312,6.513309093818203e-05,434.93014454841614,1051.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+1,4,success,0.0084767675248406,6.673977179551041e-05,570.4179196357727,1201.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+1,7,success,0.0086171477632258,6.460231872759548e-05,615.0231924057007,1251.0,val_loss_stagnation,73,1,True,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,0,failed,inf,inf,,,,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,1,failed,inf,inf,,,unknown,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,2,failed,inf,inf,,,,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,3,failed,inf,inf,,,unknown,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,4,failed,inf,inf,,,unknown,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,5,failed,inf,inf,,,unknown,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,6,failed,inf,inf,,,unknown,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06
+0,7,failed,inf,inf,,,,73,1,False,0.1,128,1e-05,Tsit5,0.0,0.0001,0.00015,2e-06

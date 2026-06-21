@@ -1,0 +1,17 @@
+config_id,run_id,parameter,value,status,stopping_condition,test_rmse,train_time,model_source
+0,0,normalize,False,failed,unknown,inf,,finished
+0,1,normalize,False,failed,unknown,inf,,finished
+0,2,normalize,False,failed,unknown,inf,,finished
+0,3,normalize,False,failed,unknown,inf,,finished
+0,4,normalize,False,failed,unknown,inf,,finished
+0,5,normalize,False,failed,unknown,inf,,finished
+0,6,normalize,False,failed,unknown,inf,,finished
+0,7,normalize,False,failed,unknown,inf,,finished
+1,0,normalize,True,success,val_loss_stagnation,0.007097794562982238,599.6461493968964,finished
+1,1,normalize,True,success,val_loss_stagnation,0.008344853810361886,510.92241406440735,finished
+1,2,normalize,True,success,val_loss_stagnation,0.008380188882031254,434.93014454841614,finished
+1,3,normalize,True,success,val_loss_stagnation,0.007742452259642376,660.7899940013885,finished
+1,4,normalize,True,success,val_loss_stagnation,0.00847676752484065,570.4179196357727,finished
+1,5,normalize,True,success,val_loss_stagnation,0.007841374930699346,531.7102296352386,finished
+1,6,normalize,True,success,val_loss_stagnation,0.007471033820639533,638.0307207107544,finished
+1,7,normalize,True,success,val_loss_stagnation,0.008617147763225828,615.0231924057007,finished

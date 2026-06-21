@@ -13,9 +13,10 @@ venv/
 .vscode/
 
 .ipynb_checkpoints/
+ 
+Experiments/parameter_tuning/tuning_results_complete
 
-
-
+run_*
 
 .DS_Store
 Thumbs.db

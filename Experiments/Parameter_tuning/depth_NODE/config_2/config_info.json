@@ -1,0 +1,18 @@
+{
+  "config": {
+    "width_NODE": 73,
+    "depth_NODE": 3,
+    "normalize": true,
+    "dropout": 0.1,
+    "batch_size": 128,
+    "learning_rate": 1e-05,
+    "solver": "Tsit5",
+    "weight_decay": 0.0,
+    "dt0": 0.0001,
+    "rtol": 0.00015,
+    "atol": 2e-06
+  },
+  "config_id": 2,
+  "status": "completed",
+  "finished_at": 1775325989.1378512
+}
