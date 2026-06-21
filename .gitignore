@@ -14,9 +14,14 @@ venv/
 
 .ipynb_checkpoints/
  
-Experiments/parameter_tuning/tuning_results_complete
+Experiments/
 
-run_*
+run_*/
+seed_*/
+lock*
+losses*
+subset*/
+*.lock
 
 .DS_Store
 Thumbs.db
