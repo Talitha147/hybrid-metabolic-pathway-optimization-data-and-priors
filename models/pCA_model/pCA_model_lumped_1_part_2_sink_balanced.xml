@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment id="c" spatialDimensions="3" size="1" constant="true"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="substrate" compartment="c" initialAmount="0.111" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+      <species id="pcoumaric_acid" compartment="c" initialAmount="0" substanceUnits="mole" hasOnlySubstanceUnits="false" boundaryCondition="false" constant="false"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="vmax_v1" value="0.0075" constant="true"/>
+      <parameter id="km_v1_gluc" value="0.01" constant="true"/>
+      <parameter id="a" value="1.6" constant="true"/>
+      <parameter id="scale" value="1" constant="true"/>
+      <parameter id="vmax_respiration" value="0.35" constant="true"/>
+      <parameter id="km_respiration_A" value="0.03" constant="true"/>
+      <parameter id="vmax_ppp" value="0.05" constant="true"/>
+      <parameter id="km_ppp_substrate" value="0.01" constant="true"/>
+      <parameter id="vmax_glyc" value="0.1" constant="true"/>
+      <parameter id="km_glyc_substrate" value="0.02" constant="true"/>
+      <parameter id="km_shiki1_pep" value="0.02" constant="true"/>
+      <parameter id="km_shiki1_e4p" value="0.02" constant="true"/>
+      <parameter id="vmax_shiki_step1" value="0.1" constant="true"/>
+      <parameter id="vmax_shiki_step2" value="0.1" constant="true"/>
+      <parameter id="km_shiki2_pep" value="0.02" constant="true"/>
+      <parameter id="km_shiki2_dhap" value="0.02" constant="true"/>
+      <parameter id="vmax_product" value="0.1" constant="true"/>
+      <parameter id="km_product_epsp" value="0.02" constant="true"/>
+      <parameter id="vmax_sink2_pep" value="0.1" constant="true"/>
+      <parameter id="vmax_sink1_e4p" value="0.1" constant="true"/>
+      <parameter id="km_sink2_pep" value="0.02" constant="true"/>
+      <parameter id="km_sink1_e4p" value="0.02" constant="true"/>
+      <parameter id="vmax_sink3_epsp" value="0.1" constant="true"/>
+      <parameter id="km_sink3_epsp" value="0.02" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="v_substrate_product_no_co2" reversible="false">
+        <listOfReactants>
+          <speciesReference species="substrate" stoichiometry="3"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="pcoumaric_acid" stoichiometry="2"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> c_biomass </ci>
+              <ci> substrate </ci>
+              <ci> vmax_product </ci>
+              <apply>
+                <power/>
+                <ci> a </ci>
+                <cn type="integer"> -1 </cn>
+              </apply>
+              <apply>
+                <power/>
+                <ci> km_product_epsp </ci>
+                <cn type="integer"> -1 </cn>
+              </apply>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <cn type="integer"> 1 </cn>
+                  <apply>
+                    <times/>
+                    <ci> substrate </ci>
+                    <apply>
+                      <power/>
+                      <ci> km_product_epsp </ci>
+                      <cn type="integer"> -1 </cn>
+                    </apply>
+                  </apply>
+                </apply>
+                <cn type="integer"> -1 </cn>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="v_sink_substrate" reversible="false">
+        <listOfReactants>
+          <speciesReference species="substrate" stoichiometry="1"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> substrate </ci>
+              <ci> vmax_v1 </ci>
+              <apply>
+                <power/>
+                <apply>
+                  <plus/>
+                  <ci> km_v1_gluc </ci>
+                  <ci> substrate </ci>
+                </apply>
+                <cn type="integer"> -1 </cn>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
