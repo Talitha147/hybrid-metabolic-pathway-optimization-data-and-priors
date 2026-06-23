@@ -21,7 +21,7 @@ def main():
 
     model_name = "pCA_model"
 
-    tracker_path = "Experiments/Question_3/experiment_tracker.csv"
+    tracker_path = "Experiments/Question_3_sink/experiment_tracker.csv"
     
     n_test_strains = 100
 
@@ -79,7 +79,7 @@ def main():
     
         for ts_indices in indices_list:
             for strain_num in strain_nums:
-                base_path="Experiments/Question_3/"
+                base_path="Experiments/Question_3_sink/"
                 experiment_name = f"pCA_{name}_{len(ts_indices)-1}_points_{strain_num}_strains"
                 summary_path = Path(base_path) / experiment_name / "analysis" / "all_runs_summary.csv"
                 
@@ -111,18 +111,18 @@ def main():
                 gc.collect()
                 jax.clear_caches()
 
-    model_dir = "models/pCA_model/"
-    model_paths = [model_dir + "pCA_model_lumped_1_part_1.xml", model_dir + "pCA_model_lumped_2_part_1.xml", model_dir + "pCA_model_lumped_3_part_1.xml"]
+    model_dir = "models/pCA_model"
+    model_paths = [model_dir + "/pCA_model_lumped_1_part_1_sink.xml", model_dir + "/pCA_model_lumped_2_part_1_sink.xml", model_dir + "/pCA_model_lumped_3_part_1_sink.xml"]
     model_names = ["lumped_1_part_1", "lumped_2_part_1", "lumped_3_part_1"]
     
-    for model_path, name in zip(model_paths, model_names):
-        run(model_path, name)
+    # for model_path, name in zip(model_paths, model_names):
+    #     run(model_path, name)
 
-    model_paths = [model_dir + "pCA_model_lumped_1_part_2.xml", model_dir + "pCA_model_lumped_2_part_2.xml", model_dir + "pCA_model_lumped_3_part_2.xml"]
+    model_paths = [model_dir + "/pCA_model_lumped_1_part_2_sink.xml", model_dir + "/pCA_model_lumped_2_part_2_sink.xml", model_dir + "/pCA_model_lumped_3_part_2_sink.xml"]
     model_names = ["lumped_1_part_2", "lumped_2_part_2", "lumped_3_part_2"]
 
-    # Lumped reactions are masked, others are considered known
-    masks = [jnp.array([1]), jnp.array([0, 0, 0, 0, 1]), jnp.array([0, 0, 0, 0, 0, 1])]
+    # Lumped reactions are masked, others are considered known. Sinks masked.
+    masks = [jnp.array([1, 1]), jnp.array([0, 0, 0, 0, 1, 1, 1]), jnp.array([0, 0, 0, 0, 0, 1, 1, 1, 1])]
     
     for model_path, name, mask in zip(model_paths, model_names, masks):
         run(model_path, name, mask)

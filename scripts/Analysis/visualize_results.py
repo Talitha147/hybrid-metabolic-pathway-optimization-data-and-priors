@@ -1204,7 +1204,7 @@ def main():
     
     use_csv = False
 
-    base_dir = "Experiments/Question_1_new"
+    base_dir = "Experiments/Question_1"
     pkl_path = os.path.join(base_dir, "experiment_results_df.pkl")
     csv_path = os.path.join(base_dir, "experiment_results_summary.csv")
     
@@ -1228,16 +1228,16 @@ def main():
             return
 
     df = prepare_dataframe(df)
-    plot_dir = setup_plot_dir(base_dir)
+    plot_dir = setup_plot_dir("Figures/Question_1")
     
     # Check if we have the data needed for detailed plots
     has_trajectories = "Predictions" in df.columns and "GroundTruths" in df.columns
     has_paths = "Path" in df.columns
 
-    if has_paths:
-        plot_subset_loss_histories(df, plot_dir)
-    else:
-        print("Skipping loss histories (Path column missing).")
+    # if has_paths:
+    #     plot_subset_loss_histories(df, plot_dir)
+    # else:
+    #     print("Skipping loss histories (Path column missing).")
 
     plot_unified_heatmaps(df, plot_dir)
     plot_unified_heatmaps(df, plot_dir, metric="RMSE_pCA_Final")
@@ -1261,9 +1261,9 @@ def main():
     plot_rmse_per_strain_histograms(df, plot_dir)
 
 
-    if has_trajectories:
-        plot_pca_scatter_per_seed_grid(df, plot_dir)
-        plot_seed_time_series_grids(df, plot_dir)
+    # if has_trajectories:
+    #     plot_pca_scatter_per_seed_grid(df, plot_dir)
+    #     plot_seed_time_series_grids(df, plot_dir)
 
 
     print(f"\nAll plots saved to {plot_dir}")

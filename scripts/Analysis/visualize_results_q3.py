@@ -32,59 +32,40 @@ def parse_scenario_q3(exp_name):
     return "Unknown"
 
 def prepare_dataframe_q3(df):
-
+    """Post-process the dataframe for Question 3."""
     df = vr.prepare_dataframe(df)
     
+    # In Q3, we want to use Scenario (lumped_X_part_Y) as the primary category for plotting.
     df['Scenario'] = df['Experiment'].apply(parse_scenario_q3)
     
+    # Rename Part 1 models
     q3_part1_map = {
         "lumped_1_part_1": "Fully lumped",
         "lumped_2_part_1": "Highly lumped",
         "lumped_3_part_1": "Partially lumped"
     }
+    # Rename Part 2 models
+    q3_part2_map = {
+        "lumped_1_part_2": "Fully masked - lumped",
+        "lumped_2_part_2": "6 unknown - lumped",
+        "lumped_3_part_2": "5 unknown - lumped"
+    }
     df['Scenario'] = df['Scenario'].replace(q3_part1_map)
+    df['Scenario'] = df['Scenario'].replace(q3_part2_map)
     df['ModelType'] = df['Scenario']
     
     return df
 
-def main():
- 
-    use_csv = True
-
-    base_dir = "Experiments/Question_3"
-    pkl_name = "experiment_results_df.pkl"
-    csv_name = "experiment_results_summary.csv"
-    pkl_path = Path(base_dir) / pkl_name
-    csv_path = Path(base_dir) / csv_name
     
-    df = None
-    if use_csv and csv_path.exists():
-        print(f"Loading summary CSV from {csv_path}...")
-        df = pd.read_csv(csv_path)
-    
-    if df is None:
-        print(f"\nStep 1: Loading results from {base_dir} (this may take a while)...")
-        df = load_all_results(base_dir=base_dir, output_pickle=pkl_name, output_csv=csv_name)
-
-    
-    if df is None:
-        print("Failed to load results.")
+def run_plotting_suite(df, plot_dir):
+    """Runs the full suite of visualization functions for a given dataframe and directory."""
+    if df.empty:
+        print(f"No data for plots in {plot_dir}. Skipping.")
         return
 
-    scenario_order = [
-        "Fully lumped", "Highly lumped", "Partially lumped",
-        "lumped_1_part_2", "lumped_2_part_2", "lumped_3_part_2"
-    ]
+    print(f"Generating plots in {plot_dir}...")
     
-    print(f"\nStep 2: Preparing data for visualization...")
-    df = prepare_dataframe_q3(df)
-    
-    # actual_scenarios = [m for m in scenario_order if m in df['Scenario'].unique()]
-    df['Scenario'] = pd.Categorical(df['Scenario'], categories=scenario_order, ordered=True)
-    df['ModelType'] = pd.Categorical(df['ModelType'], categories=scenario_order, ordered=True)
-    
-    plot_dir = vr.setup_plot_dir(base_dir)
-
+    # Global Summaries
     vr.plot_unified_heatmaps(df, plot_dir, orientation='vertical')
     vr.plot_unified_heatmaps(df, plot_dir, metric="RMSE_pCA_Final", orientation='vertical')
     vr.plot_unified_heatmaps(df, plot_dir, metric="RMSE_pCA_All", orientation='vertical')
@@ -101,7 +82,63 @@ def main():
     vr.plot_rmse_vs_strains_steps_models(df, plot_dir)
     vr.plot_rmse_vs_strains_steps_models(df, plot_dir, metric="NRMSE_All_Species")
 
+    has_trajectories = "Predictions" in df.columns and "GroundTruths" in df.columns
+
+
+def main():
+    use_csv = True
+
+    base_dir = "Experiments/Question_3"
+    pkl_name = "experiment_results_df.pkl"
+    csv_name = "experiment_results_summary.csv"
+    pkl_path = Path(base_dir) / pkl_name
+    csv_path = Path(base_dir) / csv_name
     
+    df = None
+    if use_csv and csv_path.exists():
+        print(f"Loading summary CSV from {csv_path}...")
+        df = pd.read_csv(csv_path)
+    
+    if df is None:
+        
+        df = load_all_results(base_dir=base_dir, output_pickle=pkl_name, output_csv=csv_name)
+
+    
+    if df is None:
+        print("Failed to load results.")
+        return
+
+    # Order of scenarios for Question 3
+    scenario_order = [
+        "Fully lumped", "Highly lumped", "Partially lumped",
+        "Fully masked - lumped", "6 unknown - lumped", "5 unknown - lumped"
+    ]
+    
+    df = prepare_dataframe_q3(df)
+    
+    df['Scenario'] = pd.Categorical(df['Scenario'], categories=scenario_order, ordered=True)
+    df['ModelType'] = pd.Categorical(df['ModelType'], categories=scenario_order, ordered=True)
+    
+    plot_dir = vr.setup_plot_dir("Figures/Question_3")
+
+    run_plotting_suite(df, plot_dir)
+
+    df_part1 = df[df['Scenario'].isin(["Fully lumped", "Highly lumped", "Partially lumped"])].copy()
+    df_part1['Scenario'] = df_part1['Scenario'].cat.remove_unused_categories()
+    df_part1['ModelType'] = df_part1['ModelType'].cat.remove_unused_categories()
+    
+    plot_dir_p1 = plot_dir / "part_1"
+    plot_dir_p1.mkdir(exist_ok=True)
+    run_plotting_suite(df_part1, plot_dir_p1)
+
+    
+    df_part2 = df[df['Scenario'].isin(["Fully masked - lumped", "6 unknown - lumped", "5 unknown - lumped"])].copy()
+    df_part2['Scenario'] = df_part2['Scenario'].cat.remove_unused_categories()
+    df_part2['ModelType'] = df_part2['ModelType'].cat.remove_unused_categories()
+    
+    plot_dir_p2 = plot_dir / "part_2"
+    plot_dir_p2.mkdir(exist_ok=True)
+    run_plotting_suite(df_part2, plot_dir_p2)
 
     print(f"\nAll plots saved to {plot_dir}")
     print(f"Pipeline complete.")

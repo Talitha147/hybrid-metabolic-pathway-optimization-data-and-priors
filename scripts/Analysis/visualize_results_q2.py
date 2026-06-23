@@ -81,13 +81,13 @@ def main():
     df['Scenario'] = pd.Categorical(df['Scenario'], categories=actual_scenarios, ordered=True)
     df['ModelType'] = pd.Categorical(df['ModelType'], categories=actual_scenarios, ordered=True)
     
-    plot_dir = vr.setup_plot_dir(base_dir)
+    plot_dir = vr.setup_plot_dir("Figures/Question_2")
 
     has_trajectories = "Predictions" in df.columns and "GroundTruths" in df.columns
     
-    # Loss histories
-    if "Path" in df.columns:
-        vr.plot_subset_loss_histories(df, plot_dir)
+    # # Loss histories
+    # if "Path" in df.columns:
+    #     vr.plot_subset_loss_histories(df, plot_dir)
 
     # Global Summaries
     vr.plot_unified_heatmaps(df, plot_dir, orientation='vertical')
