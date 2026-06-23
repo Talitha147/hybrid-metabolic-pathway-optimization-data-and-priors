@@ -1,4 +1,4 @@
-# Hybrid Metabolic Pathway Optimization: Data and Priors
+# Hybrid Modelling for Metabolic Pathway Optimization: The Impact of Data Availability and Prior Mechanistic Knowledge
 
 ## Overview
 
@@ -90,7 +90,13 @@ The repository uses several model formulations:
 
 ## Setup
 
-1. Create and activate a Python environment.
+1. Clone this repository:
+
+```bash
+git clone https://github.com/Talitha147/hybrid-metabolic-pathway-optimization-data-and-priors.git
+cd hybrid-metabolic-pathway-optimization-data-and-priors
+```
+
 2. Install dependencies:
 
 ```bash
